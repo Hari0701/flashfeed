@@ -1,0 +1,6 @@
+flask
+flask-cors
+pygooglenews
+pytest
+googlenewsdecoder
+newspaper3k
