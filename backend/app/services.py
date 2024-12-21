@@ -1,8 +1,8 @@
 from pygooglenews import GoogleNews
-import requests
-from bs4 import BeautifulSoup
-from nltk.tokenize import sent_tokenize
+from newspaper import Article
+from googlenewsdecoder import new_decoderv1  # Ensure this library is installed
 
+# Initialize the Google News object
 gn = GoogleNews()
 
 def fetch_news(query):
@@ -15,9 +15,12 @@ def fetch_news(query):
             'link': entry.link,
             'published': entry.published,
         }
+        # Fetch and summarize the article content
         content = fetch_article_content(entry.link)
         if content:
-            article['summary'] = summarize_content(content)
+            article['summary'] = content
+        else:
+            article['summary'] = "Content could not be retrieved or summarized."
         articles.append(article)
     return articles
 
@@ -31,38 +34,41 @@ def fetch_top_news():
             'link': entry.link,
             'published': entry.published,
         }
+        # Fetch and summarize the article content
         content = fetch_article_content(entry.link)
         if content:
-            article['summary'] = summarize_content(content)
+
+            article['summary'] = content
+        else:
+            article['summary'] = "Content could not be retrieved or summarized."
         articles.append(article)
     return articles
 
 def fetch_article_content(url):
     """
-    Fetch the main content of an article from a URL.
-    Returns plain text content of the article.
+    Fetch and extract article content by decoding the Google News URL
+    and then retrieving the actual article content using Newspaper3k.
     """
     try:
-        response = requests.get(url, timeout=10)
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            # Extract content inside <p> tags
-            paragraphs = soup.find_all('p')
-            content = ' '.join([para.get_text() for para in paragraphs])
-            return content.strip()
-    except Exception as e:
-        print(f"Error fetching content from {url}: {e}")
-    return None
+        # Step 1: Decode the Google News URL
+        interval_time = 5  # You can adjust the interval time if needed
+        decoded_url_info = new_decoderv1(url, interval=interval_time)
+        print(decoded_url_info)
+        # Check if the decoding was successful
+        if decoded_url_info.get("status"):
+            print("Decoded URL:", decoded_url_info["decoded_url"])
+        else:
+            print(f"Error decoding URL: {decoded_url_info.get('message', 'Unknown error')}")
+            return None
 
-def summarize_content(content):
-    """
-    Summarize the content using NLTK's sentence tokenizer.
-    Returns the first 5 sentences as a simple summary.
-    """
-    try:
-        sentences = sent_tokenize(content)
-        summary = ' '.join(sentences[:5])  # Adjust number of sentences for the summary
-        return summary
+        # Step 2: Fetch and parse the article content using Newspaper3k
+        article = Article(decoded_url_info["decoded_url"])
+        article.download()
+        article.parse()
+
+        # Return the article's content (text)
+        return article.text
+
     except Exception as e:
-        print(f"Error summarizing content: {e}")
-    return "Summary not available."
+        print(f"Error occurred while fetching article content: {e}")
+        return None
