@@ -8,7 +8,6 @@ def search_news():
     query = request.args.get('q')
     if not query:
         return jsonify({'error': 'Missing query parameter "q"'}), 400
-
     news = fetch_news(query)
     return jsonify(news)
 

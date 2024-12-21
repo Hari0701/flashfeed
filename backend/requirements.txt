@@ -2,3 +2,6 @@ flask
 flask-cors
 pygooglenews
 pytest
+beautifulsoup4 
+requests 
+nltk
