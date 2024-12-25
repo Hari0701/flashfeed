@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.services import fetch_news, fetch_top_news
+from app.services import fetch_news, fetch_top_news, fetch_news_by_category
 
 routes = Blueprint('routes', __name__)
 
@@ -14,4 +14,12 @@ def search_news():
 @routes.route('/top-news', methods=['GET'])
 def top_news():
     news = fetch_top_news()
+    return jsonify(news)
+
+@routes.route('/category-news', methods=['GET'])
+def category_news():
+    category = request.args.get('category')
+    if not category:
+        return jsonify({'error': 'Missing query parameter "category"'}), 400
+    news = fetch_news_by_category(category)
     return jsonify(news)
