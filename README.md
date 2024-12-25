@@ -1,4 +1,4 @@
-***Flashfeed**
+**Flashfeed**
 
 A faster way to consume news.
 
