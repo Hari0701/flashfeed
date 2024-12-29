@@ -1,70 +1,50 @@
-# My React Native News App
+# Welcome to your Expo app 👋
 
-This is a React Native application built with Expo that displays news articles categorized by different topics. The app features a navigation bar, category tags for filtering articles, and a clean interface for reading news.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Project Structure
+## Get started
 
-```
-my-react-native-app
-├── src
-│   ├── components
-│   │   ├── Navbar.tsx          # Navigation bar component
-│   │   ├── CategoryTags.tsx    # Component for displaying category tags
-│   │   └── NewsArticle.tsx     # Component for rendering individual news articles
-│   ├── screens
-│   │   ├── HomeScreen.tsx      # Main screen displaying articles
-│   │   └── CategoryScreen.tsx   # Screen for displaying articles by category
-│   ├── services
-│   │   └── api.ts              # API service for fetching articles
-│   ├── App.tsx                 # Entry point of the application
-│   └── types
-│       └── index.ts            # TypeScript types and interfaces
-├── assets                       # Directory for static assets (images, fonts, etc.)
-├── App.json                    # Expo configuration file
-├── package.json                # NPM configuration file
-└── tsconfig.json               # TypeScript configuration file
-```
+1. Install dependencies
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js installed on your machine
-- Expo CLI installed globally (`npm install -g expo-cli`)
-
-### Installation
-
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd my-react-native-app
-   ```
-
-2. Install dependencies:
-   ```
+   ```bash
    npm install
    ```
 
-### Running the App
+2. Start the app
 
-To start the development server and run the app, use the following command:
+   ```bash
+    npx expo start
+   ```
 
+In the output, you'll find options to open the app in a
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
+
+```bash
+npm run reset-project
 ```
-expo start
-```
 
-This will open a new tab in your browser with the Expo developer tools. You can run the app on an emulator or a physical device using the Expo Go app.
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Usage
+## Learn more
 
-- The `HomeScreen` displays a list of news articles.
-- Use the `Navbar` to navigate through different sections of the app.
-- The `CategoryTags` component allows you to filter articles by category.
+To learn more about developing your project with Expo, look at the following resources:
 
-## Contributing
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-Feel free to submit issues or pull requests for any improvements or bug fixes.
+## Join the community
 
-## License
+Join our community of developers creating universal apps.
 
-This project is licensed under the MIT License.
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

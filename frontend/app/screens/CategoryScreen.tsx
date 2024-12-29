@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import Navbar from "../components/Navbar";
+import CategoryTags from "../components/CategoryTags";
 import NewsArticle from "../components/NewsArticle";
-import { fetchTopNews } from "../services/api";
+import { fetchNewsByCategory } from "../services/_api";
 
-const HomeScreen = () => {
+const CategoryScreen = () => {
   const [articles, setArticles] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Technology");
 
   useEffect(() => {
-    fetchTopNews().then(setArticles);
-  }, []);
+    fetchNewsByCategory(selectedCategory).then(setArticles);
+  }, [selectedCategory]);
 
   return (
     <View style={styles.container}>
       <Navbar />
+      <CategoryTags onSelectCategory={setSelectedCategory} />
       <ScrollView>
         {articles.map((article, index) => (
           <NewsArticle key={index} article={article} />
@@ -29,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default CategoryScreen;
